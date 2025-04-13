@@ -7,10 +7,10 @@ using Demo.DAL.Models;
 
 namespace Demo.DAL.Data.Repository.Interfaces
 {
-    internal interface IDepartmentRepository
+    public interface IDepartmentRepository
     {
         // Get All
-        IEnumerable<Department> GetAll(bool withtracking); // we choose to use IEnumerable over ICollection and IQueryable because we need to get all the data not filtiratrion nedded
+        IEnumerable<Department> GetAll(bool withtracking = false); // we choose to use IEnumerable over ICollection and IQueryable because we need to get all the data not filtiratrion nedded
         // Get Department by Id 
         Department GetById(int id);
         // Update

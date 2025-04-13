@@ -17,7 +17,7 @@ namespace Demo.DAL.Data.Configurations
             builder.Property(D => D.Name).HasColumnType("varchar(20)");
             builder.Property(D => D.Code).HasColumnType("varchar(20)");
             builder.Property(D => D.CreatedOn).HasDefaultValueSql("GETDATE()"); // DOES'T ALLOW MODIFICATION
-            builder.Property(D => D.CreatedOn).HasComputedColumnSql("GETDATE()"); //  ALLOW MODIFICATION
+            builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETDATE()"); //  ALLOW MODIFICATION
 
 
         }
