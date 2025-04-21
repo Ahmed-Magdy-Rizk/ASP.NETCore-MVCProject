@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Demo.BLL.DTO;
-using Demo.DAL.Models;
+using Demo.BLL.DTO.DepartmentDTO;
+using Demo.DAL.Models.DepartmentModel;
 
 namespace Demo.BLL.Factory
 {

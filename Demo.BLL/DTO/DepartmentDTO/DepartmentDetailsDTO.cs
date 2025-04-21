@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Demo.DAL.Models;
+using Demo.DAL.Models.DepartmentModel;
 
-namespace Demo.BLL.DTO
+namespace Demo.BLL.DTO.DepartmentDTO
 {
     public class DepartmentDetailsDTO
     {
@@ -19,7 +19,7 @@ namespace Demo.BLL.DTO
             CreatedOn = DateOnly.FromDateTime(department.CreatedOn.Value);
             CreatedBy = department.CreatedBy;
             LastModifiedBy = department.LastModifiedBy;
-         
+
         }
         public int Id { get; set; }
         public int CreatedBy { get; set; } // the user Id who created this record

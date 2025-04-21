@@ -1,4 +1,6 @@
-using Demo.BLL.Services;
+using Demo.BLL.Profiles;
+using Demo.BLL.Services.Classes;
+using Demo.BLL.Services.Interfaces;
 using Demo.DAL.Data;
 using Demo.DAL.Data.Repository.Claess;
 using Demo.DAL.Data.Repository.Interfaces;
@@ -24,6 +26,9 @@ namespace Demo.PL
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
             #endregion
 
             var app = builder.Build();

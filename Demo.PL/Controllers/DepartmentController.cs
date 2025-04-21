@@ -1,9 +1,9 @@
-﻿using Demo.BLL.DTO;
-using Demo.BLL.Services;
+﻿using Demo.BLL.DTO.DepartmentDTO;
+using Demo.BLL.Services.Interfaces;
 using Demo.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Demo.PL.Controllers
 {
     public class DepartmentController(IDepartmentService _departmentService,
@@ -61,6 +61,7 @@ namespace Demo.PL.Controllers
             return View(departmentDTO);
         }
         #endregion
+
         #region Details of Department
         [HttpGet]
         public IActionResult Details(int? id) // we make id nullable to be able to check if the user provided an id or not
@@ -71,6 +72,7 @@ namespace Demo.PL.Controllers
             return View(department);
         }
         #endregion
+
         #region Edit Department
         [HttpGet]
         public IActionResult Edit(int? id) // we make id nullable to be able to check if the user provided an id or not
@@ -136,5 +138,60 @@ namespace Demo.PL.Controllers
         }
         #endregion
 
+        #region Delete
+        //[HttpGet]
+        //public IActionResult Delete(int? id)
+        //{
+        //    if (!id.HasValue) return BadRequest();
+        //    var depratment = _departmentService.GetDepartmentById(id.Value);
+
+        //    if (depratment is null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(depratment);
+        //}
+        
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            if (id == 0) return BadRequest();
+            try
+            {
+                bool deleted = _departmentService.DeleteDepartment(id);
+                if(deleted)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Department is not deleted");
+                    return RedirectToAction(nameof(Delete), new {id});
+                }
+            }
+            catch (Exception exception)
+            {
+
+                // log Exception
+                if (_environment.IsDevelopment())
+                {
+                    // 1. in development enviroment => Log Error in console and return the same view but with error message
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                    return Redirect(nameof(Index));
+                }
+                else
+                {
+
+                    // 2. 
+                    _logger.LogError(exception.Message);
+                    //return View(departmentDTO);
+                }
+            }
+            var depratment = _departmentService.GetDepartmentById(id);
+
+            if (depratment is null ) return NotFound();
+            return View("Error");
+        }
+        #endregion
     }
 }

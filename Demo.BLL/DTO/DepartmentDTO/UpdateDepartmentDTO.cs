@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.BLL.DTO
+namespace Demo.BLL.DTO.DepartmentDTO
 {
-    public class CreatedDepartmentDTO
+    public class UpdateDepartmentDTO
     {
-        public string Name { get; set; } = null;
-        public string Code { get; set; } = null;
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
         public DateOnly DateOfCreation { get; set; } // the date of creation 
         public string? Description { get; set; }
     }
