@@ -11,7 +11,7 @@ namespace Demo.DAL.Data.Repository.Interfaces
     public interface IGenericRepository<TEntity> where TEntity : BaseEntity
     {
         // Get All
-        public IEnumerable<TEntity> GetAll(bool withtracking = false); // we choose to use IEnumerable over ICollection and IQueryable because we need to get all the data not filtiratrion nedded
+        public IQueryable<TEntity> GetAll(bool withtracking = false); // we choose to use IEnumerable over ICollection and IQueryable because we need to get all the data not filtiratrion nedded
                                                                           // Get Department by Id 
         public TEntity GetById(int id);
         // Update

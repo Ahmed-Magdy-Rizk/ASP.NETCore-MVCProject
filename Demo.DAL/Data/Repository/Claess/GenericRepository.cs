@@ -25,15 +25,15 @@ namespace Demo.DAL.Data.Repository.Claess
             return _dbContext.SaveChanges();
         }
 
-        public IEnumerable<TEntity> GetAll(bool withtracking = false)
+        public IQueryable<TEntity> GetAll(bool withtracking = false)
         {
             if (withtracking)
             {
-                return _dbContext.Set<TEntity>().ToList();
+                return _dbContext.Set<TEntity>().Where(E => E.IsDeleted == false);
             }
             else
             {
-                return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+                return _dbContext.Set<TEntity>().Where(E => E.IsDeleted == false).AsNoTracking();
             }
         }
 
