@@ -10,9 +10,9 @@ namespace Demo.DAL.Data.Repository.Claess
 {
     public class EmployeeRepository(AppDbContext _dbContext) : GenericRepository<Employee>(_dbContext), IEmployeeRepository
     {
-        public IQueryable<Employee> GetEmployeeByAddress(string address)
+        public IQueryable<Employee> GetEmployeeByName(string name)
         {
-            throw new NotImplementedException();
+            return _dbContext.Employees.Where(E => E.Name.ToLower().Contains(name));
         }
     }
 }

@@ -15,11 +15,11 @@ namespace Demo.DAL.Data.Repository.Interfaces
                                                                           // Get Department by Id 
         public TEntity GetById(int id);
         // Update
-        public int Update(TEntity Entity); // return type is int because it will return the number of affected rows
+        public void Update(TEntity Entity); // return type is int because it will return the number of affected rows
         // Delete
-        public int Delete(TEntity Entity);
+        public void Delete(TEntity Entity);
         // Insert
-        public int Add(TEntity Entity);
+        public void Add(TEntity Entity);
 
     }
 }

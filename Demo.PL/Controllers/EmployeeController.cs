@@ -12,7 +12,7 @@ namespace Demo.PL.Controllers
     public class EmployeeController(IEmployeeServices _employeeServices,
         ILogger<DepartmentController> _logger, IWebHostEnvironment _environment) : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string? EmployeeSearchName)
         {
             // Binding throw view's dictinary 
             // 1. viewdata
@@ -20,14 +20,27 @@ namespace Demo.PL.Controllers
 
             // 2. viewbag
             ViewBag.Message = "Hello from ViewBag";
-            var Employess = _employeeServices.GetAllEmployees();
-            return View(Employess);
+
+
+            if (string.IsNullOrEmpty(EmployeeSearchName))
+            {
+                var Employess = _employeeServices.GetAllEmployees();
+
+                return View(Employess);
+
+            }
+            else
+            {
+                var Employess = _employeeServices.SearchEmployeeByName(EmployeeSearchName);
+                return View();
+            }
         }
 
         #region Create Employee
         [HttpGet]
         public IActionResult Create()
         {
+            //ViewData["Departments"] = _departmentService.GetAllDepartments();
             return View();
         }
         [HttpPost]
@@ -49,6 +62,7 @@ namespace Demo.PL.Controllers
                         HiringDate = EmployeeDTO.HiringDate,
                         PhoneNumber = EmployeeDTO.PhoneNumber,
                         Salary = EmployeeDTO.Salary,
+                        DepartmentId = EmployeeDTO.DepartmentId,
                     };
                     int result = _employeeServices.CreateEmployee(employeeCreatedDto);
                     if (result > 0)
@@ -60,6 +74,7 @@ namespace Demo.PL.Controllers
                     {
                         TempData["Message"] = "Employee Creating Failed";
                         ModelState.AddModelError(string.Empty, "Employee can't be created !!");
+
                         return View(EmployeeDTO); // if Employee faild to be created return the same page but the old data
                     }
                 }
@@ -114,6 +129,7 @@ namespace Demo.PL.Controllers
                 Gender = Enum.Parse<Gender>(employee.Gender),
                 EmployeeType = Enum.Parse<EmployeeType>(employee.EmployeeType),
             };
+            //ViewData["Departments"] = _departmentService.GetAllDepartments();
             return View(employeeDTO);
         }
 

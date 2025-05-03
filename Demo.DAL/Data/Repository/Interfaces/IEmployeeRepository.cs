@@ -10,7 +10,8 @@ namespace Demo.DAL.Data.Repository.Interfaces
 {
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
-        public IQueryable<Employee> GetEmployeeByAddress(string address);
+        public IQueryable<Employee> GetEmployeeByName(string name);
 
     }
+    
 }
